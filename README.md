@@ -1,3 +1,7 @@
+# ChatApp
+
+<img src="https://i.ibb.co/b7R4Mnc/Screen-Shot-2020-12-28-at-12-26-32-PM.png">
+
 ## Requirements
 
 - Node 10+ (check with `node --version`)
