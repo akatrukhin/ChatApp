@@ -12,15 +12,22 @@ export const ErrorMessage = ({ message }: { message: string }) => {
 
 const useStyles = createUseStyles({
   root: {
-    position: "sticky",
+    position: "fixed",
     top: 0,
-    left: "1rem",
-    right: "1rem",
+    left: "50%",
     padding: "1rem 2rem",
     borderRadius: "6px",
     fontWeight: 600,
     color: "var(--error-fg)",
     background: "var(--error-bg)",
     border: "var(--error-border)",
+    animation: "$notificationIn .2s both ease-in-out",
+  },
+  "@keyframes notificationIn": {
+    from: {
+      opacity: 0,
+      transform: "translate3d(0, -100%, 0)",
+    },
+    to: { opacity: 1 },
   },
 });

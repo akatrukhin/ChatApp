@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
 import { chatEntities } from "../../entities";
 import { sharedStyles } from "../styles";
@@ -7,15 +7,25 @@ export const WelcomeScreen: React.FC = () => {
   const styles = useStyles();
   const [userName, setUserName] = useState<string>("");
   const [showError, setShowError] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
+
   const userNameRule = /^[A-Za-z]+$/;
 
+  useEffect(() => {
+    setDisabled(!navigator.onLine || userName.length < 3);
+    if (!navigator.onLine) {
+      chatEntities.testConnection();
+    }
+  }, [userName, chatEntities.apiStatus]);
+
   return (
-    <div className={styles.root}>
+    <div className={styles.welcome}>
       <h1 className={styles.title}>Welcome to Chat App 👋</h1>
       <form
         className={styles.form}
         onSubmit={(e) => {
           e.preventDefault();
+          chatEntities.testConnection();
           if (userName.length > 3 && !!userName.match(userNameRule)) {
             chatEntities.joinToChat(userName);
           } else {
@@ -35,7 +45,7 @@ export const WelcomeScreen: React.FC = () => {
           className={styles.button}
           type="submit"
           value="Join"
-          disabled={!(userName.length > 3)}
+          disabled={disabled}
         />
       </form>
       {showError && (
@@ -48,7 +58,7 @@ export const WelcomeScreen: React.FC = () => {
 };
 
 const useStyles = createUseStyles({
-  root: {
+  welcome: {
     position: "absolute",
     top: "50%",
     left: "50%",

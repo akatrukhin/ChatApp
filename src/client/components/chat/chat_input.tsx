@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
 import { sharedStyles } from "../styles";
 import { chatEntities } from "../../entities";
@@ -6,6 +6,14 @@ import { chatEntities } from "../../entities";
 export const ChatInput = () => {
   const styles = useStyles();
   const [message, setMessage] = useState<string>("");
+  const [disabled, setDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    setDisabled(!navigator.onLine || !message.length);
+    if (!navigator.onLine) {
+      chatEntities.testConnection();
+    }
+  }, [message, chatEntities.apiStatus]);
 
   return (
     <form
@@ -17,6 +25,7 @@ export const ChatInput = () => {
           .then(() => setMessage(""))
           .catch((err) => {
             chatEntities.apiStatus = err.toString();
+            setDisabled(true);
           });
       }}
     >
@@ -33,7 +42,7 @@ export const ChatInput = () => {
         className={styles.button}
         type="submit"
         value="Send"
-        disabled={!message}
+        disabled={disabled}
         maxLength={200}
       />
     </form>

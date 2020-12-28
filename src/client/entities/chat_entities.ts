@@ -26,7 +26,8 @@ export class ChatEntities {
       sentMessage: action,
       getChatMessages: action,
       joinToChat: action,
-      closeChat: action
+      closeChat: action,
+      testConnection: action
     })
 
     api
@@ -41,7 +42,7 @@ export class ChatEntities {
       });
   }
 
-  getChatMessages() {
+  getChatMessages(): void {
     if (this.socket) {
       this.socket.onmessage = (event) => {
         const json = JSON.parse(event.data)
@@ -50,6 +51,16 @@ export class ChatEntities {
         }
       };
     }
+  }
+
+  testConnection(): void {
+    api
+      .test().then(() => {
+        this.apiStatus = EntitiesApiStatus.Connected
+      })
+      .catch((err) => {
+        this.apiStatus = err.toString()
+      });
   }
 
   sentMessage(message: { from: string; body: string }): Promise<{ success: Boolean; }> {

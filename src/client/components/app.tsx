@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
 import { observer } from "mobx-react-lite";
 
@@ -11,24 +11,25 @@ import { LoadingIndicator, ErrorMessage } from "./shared";
 export const App = observer(
   ({ chatEntities }: { chatEntities: ChatEntities }) => {
     const styles = useStyles();
+    const [showError, setShowError] = useState<boolean>(false);
+
+    useEffect(() => {
+      setShowError(
+        chatEntities.apiStatus !== EntitiesApiStatus.Connected &&
+          chatEntities.apiStatus !== EntitiesApiStatus.Loading
+      );
+    }, [chatEntities.apiStatus]);
 
     let content = <LoadingIndicator />;
-    if (chatEntities.apiStatus === EntitiesApiStatus.Connected) {
+    if (chatEntities.apiStatus !== EntitiesApiStatus.Loading) {
       content = chatEntities.isOpen ? <Chat /> : <WelcomeScreen />;
     }
 
-    let error;
-    if (
-      chatEntities.apiStatus !== EntitiesApiStatus.Connected &&
-      chatEntities.apiStatus !== EntitiesApiStatus.Loading
-    ) {
-      error = <ErrorMessage message={chatEntities.apiStatus} />;
-    }
-
     return (
-      <div className={styles.root}>
+      <div className={styles.app}>
         {content}
-        {error}
+
+        {showError && <ErrorMessage message={chatEntities.apiStatus} />}
       </div>
     );
   }
@@ -36,7 +37,7 @@ export const App = observer(
 
 const useStyles = createUseStyles({
   ...globalStyles,
-  root: {
+  app: {
     position: "relative",
     width: "100%",
     minWidth: "770px",
