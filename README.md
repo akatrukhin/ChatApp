@@ -26,8 +26,7 @@ A webpage should open up for you automatically.
 
 ## Stretch Goals
 
-- Make the username persist between sessions
-- Add HTML5 notifications
-- Implement rate limiting to prevent spamming the chat
-- Go all out on the styling (animations are a plus!)
-- Add a custom feature of your own choosing (Be sure to describe it to us!)
+- [ ] Make the username persist between sessions
+- [ ] Add HTML5 notifications
+- [ ] Implement rate limiting to prevent spamming the chat
+- [x] Go all out on the styling (animations)
