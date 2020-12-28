@@ -12,7 +12,6 @@ export const ChatPane = () => {
 
   useEffect(() => {
     const socket: WebSocket = api.openMessageSocket();
-    console.log(socket);
     function socketMessage(event: MessageEvent) {
       const json = JSON.parse(event.data);
       if (json.type === "message") {
@@ -45,7 +44,7 @@ const useStyles = createUseStyles({
     margin: "0 0 1rem 0",
     paddingBottom: "1rem",
     overflowY: "scroll",
-    animation: "$chatFadeIn 1s both ease-out",
+    animation: "$chatFadeIn .1s both ease-out",
   },
   "@keyframes chatFadeIn": {
     from: {
