@@ -3,24 +3,12 @@ import { createUseStyles } from "react-jss";
 import { chatEntities } from "../../entities";
 import { IChatMessage } from "./types";
 
-interface IChatMessageContainer extends IChatMessage {
-  index: number;
-}
-
-export const ChatMessage = ({
-  index,
-  body,
-  from,
-  time,
-}: IChatMessageContainer) => {
+export const ChatMessage = ({ body, from, time }: IChatMessage) => {
   const styles = useStyles();
+
   return (
     <div
-      key={index}
       className={chatEntities.author === from ? styles.sent : styles.recieved}
-      style={{
-        animationDelay: `${index * 50}ms`,
-      }}
     >
       <div>
         <span className={styles.author}>{from}</span>
@@ -42,10 +30,7 @@ const useStyles = createUseStyles({
     padding: ".5rem 1rem",
     marginBottom: ".55rem",
     opacity: 0,
-    animationName: "$messageIn",
-    animationDuration: ".175s",
-    animationFillMode: "both",
-    animationTimingFunction: "ease-out",
+    animation: "$messageIn .1s .175s both ease-out",
   },
   sent: {
     composes: "$root",

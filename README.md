@@ -8,14 +8,13 @@
 - `npm install` to get all of the dependencies
 - `npm start` to run the API and webpack servers
 
-A webpage should open up for you automatically. 
+A webpage should open up for you automatically.
 
 ## Core Goals
 
-- [x] Write clear and concise code that succesfully compiles without errors (compile time or run time)
-- [x] Implement the wireframes at a minimum as shown
-  - You can change things to improve user experience and interface as you see fit, as long as the app functions as expected
-- [x] Add some basic styling to the application to make it usable
+- [x] Write clear and concise code
+- [x] Implement the wireframes
+- [x] Basic styling
 - [x] Handle any server communication errors that could come from regular user interaction, ideally informing the user of the errors
   - e.g. going offline, messages failing to send
 - [x] Work within the existing codebase to meet the requirements
