@@ -8,7 +8,7 @@
 - `npm install` to get all of the dependencies
 - `npm start` to run the API and webpack servers
 
-A webpage should open up for you automatically. Hot module replacement is configured, so just save your code and changes should show up!
+A webpage should open up for you automatically. 
 
 ## Core Goals
 
@@ -26,8 +26,6 @@ A webpage should open up for you automatically. Hot module replacement is config
   - The user should be informed when their input is invalid
 
 ## Stretch Goals
-
-If you finish with some time to spare and want to add a little flair, you could implement the following:
 
 - Make the username persist between sessions
 - Add HTML5 notifications
