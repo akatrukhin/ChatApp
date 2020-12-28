@@ -1,41 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import { observable } from "mobx";
+import React, { useEffect, useRef } from "react";
+import { observer } from "mobx-react-lite";
 import { createUseStyles } from "react-jss";
-import api from "../../lib/api";
+import { chatEntities } from "../../entities";
 import { ChatMessage } from "./chat_message";
 import { IChatMessage } from "./types";
 
-export const ChatPane = () => {
+export const ChatPane = observer(() => {
   const styles = useStyles();
-  const messagesRef = useRef<IChatMessage[]>([]);
   const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [messages, setMessages] = useState<IChatMessage[]>([]);
-
   useEffect(() => {
-    const socket: WebSocket = api.openMessageSocket();
-    function socketMessage(event: MessageEvent) {
-      const json = JSON.parse(event.data);
-      if (json.type === "message") {
-        messagesRef.current = [...messagesRef.current, json.data];
-        setMessages([...messagesRef.current, json]);
-        anchorRef.current!.scrollIntoView();
-      }
-    }
-    socket.addEventListener("message", socketMessage);
-    return () => {
-      socket.removeEventListener("message", socketMessage);
-      socket.close();
-    };
-  }, []);
+    anchorRef.current!.scrollIntoView();
+  }, [chatEntities.messages.length]);
 
   return (
     <div className={styles.chat}>
-      {messagesRef.current.map((message: IChatMessage, key: number) => (
+      {chatEntities.messages.map((message: IChatMessage, key: number) => (
         <ChatMessage key={key} {...message} />
       ))}
       <div ref={anchorRef}></div>
     </div>
   );
-};
+});
 
 const useStyles = createUseStyles({
   chat: {
