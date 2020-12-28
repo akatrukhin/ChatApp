@@ -4,7 +4,7 @@ import { chatEntities } from "../../entities";
 import { sharedStyles } from "../styles";
 
 export const WelcomeScreen: React.FC = () => {
-  const styles = welcomeScreenStyles();
+  const styles = useStyles();
   const [userName, setUserName] = useState<string>("");
   const [showError, setShowError] = useState<boolean>(false);
   const userNameRule = /^[A-Za-z]+$/;
@@ -47,7 +47,7 @@ export const WelcomeScreen: React.FC = () => {
   );
 };
 
-const welcomeScreenStyles = createUseStyles({
+const useStyles = createUseStyles({
   root: {
     position: "absolute",
     top: "50%",

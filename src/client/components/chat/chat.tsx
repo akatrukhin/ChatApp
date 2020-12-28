@@ -3,7 +3,6 @@ import { createUseStyles } from "react-jss";
 import { ChatPane } from "./chat_pane";
 import { ChatInput } from "./chat_input";
 import { chatEntities } from "../../entities";
-import api from "../../lib/api";
 
 export const Chat = () => {
   const styles = useStyles();

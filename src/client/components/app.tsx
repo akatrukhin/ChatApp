@@ -3,8 +3,8 @@ import { createUseStyles } from "react-jss";
 import { observer } from "mobx-react-lite";
 
 import { ChatEntities, EntitiesApiStatus } from "../entities";
-import { WelcomeScreen } from "./welcome/welcome";
-import { Chat } from "./chat/chat";
+import { WelcomeScreen } from "./welcome";
+import { Chat } from "./chat";
 import { globalStyles } from "./styles";
 import { LoadingIndicator, ErrorMessage } from "./shared";
 
@@ -43,6 +43,5 @@ const useStyles = createUseStyles({
     height: "100vh",
     padding: 40,
     overflowY: "scroll",
-    overscrollBehavior: "none",
   },
 });
