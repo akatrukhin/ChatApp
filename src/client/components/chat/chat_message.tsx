@@ -7,7 +7,7 @@ export const ChatMessage = ({ body, from, time }: IChatMessage) => {
   const styles = useStyles();
 
   return (
-    <div
+    <li
       className={chatEntities.author === from ? styles.sent : styles.recieved}
     >
       <div>
@@ -20,7 +20,7 @@ export const ChatMessage = ({ body, from, time }: IChatMessage) => {
         </span>
       </div>
       <div className={styles.message}>{body}</div>
-    </div>
+    </li>
   );
 };
 
@@ -30,6 +30,7 @@ const useStyles = createUseStyles({
     padding: ".5rem 1rem",
     marginBottom: ".55rem",
     opacity: 0,
+    listStyle: "none",
     animation: "$messageIn .1s .175s both ease-out",
   },
   sent: {

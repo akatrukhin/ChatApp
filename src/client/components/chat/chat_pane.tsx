@@ -14,12 +14,12 @@ export const ChatPane = observer(() => {
   }, [chatEntities.messages.length]);
 
   return (
-    <div className={styles.chat}>
+    <ul className={styles.chat}>
       {chatEntities.messages.map((message: IChatMessage, key: number) => (
         <ChatMessage key={key} {...message} />
       ))}
       <div ref={anchorRef}></div>
-    </div>
+    </ul>
   );
 });
 
@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
     flexGrow: 1,
     borderBottom: "var(--chat-border)",
     margin: "0 0 1rem 0",
-    paddingBottom: "1rem",
+    padding: "0 1rem",
     overflowY: "scroll",
     animation: "$chatFadeIn .1s both ease-out",
   },

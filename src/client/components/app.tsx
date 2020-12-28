@@ -14,7 +14,7 @@ export const App = observer(
 
     let content = <LoadingIndicator />;
     if (chatEntities.apiStatus === EntitiesApiStatus.Connected) {
-      content = chatEntities.isActive ? <Chat /> : <WelcomeScreen />;
+      content = chatEntities.isOpen ? <Chat /> : <WelcomeScreen />;
     }
 
     let error;

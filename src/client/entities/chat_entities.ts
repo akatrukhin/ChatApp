@@ -9,19 +9,19 @@ export enum EntitiesApiStatus {
 
 export class ChatEntities {
   // API
-  socket: WebSocket | undefined;
+  socket?: WebSocket;
   apiStatus: EntitiesApiStatus | string = EntitiesApiStatus.Loading
 
   // Chat Properties
   author?: string
-  isActive: boolean = false
+  isOpen: boolean = false
   messages: IChatMessage[] = []
 
   constructor() {
     makeObservable(this, {
       apiStatus: observable,
       author: observable,
-      isActive: observable,
+      isOpen: observable,
       messages: observable,
       sentMessage: action,
       getChatMessages: action,
@@ -58,12 +58,19 @@ export class ChatEntities {
   }
 
   joinToChat(userName: string): void {
-    this.author = userName
-    this.isActive = true
+    api
+      .test()
+      .then(() => {
+        this.author = userName
+        this.isOpen = true
+      })
+      .catch((err) => {
+        this.apiStatus = err.toString()
+      });
   }
 
   closeChat(): void {
-    this.isActive = false
+    this.isOpen = false
   }
 };
 
