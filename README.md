@@ -9,8 +9,8 @@
 
 ## Running the project
 
-- `npm install` to get all of the dependencies
-- `npm start` to run the API and webpack servers
+- `yarn` to get all of the dependencies
+- `yarn start` to run the API and webpack servers
 
 A webpage should open up for you automatically.
 
